@@ -1,0 +1,64 @@
+# Self-hosted comparators, resource-capped to match CognoDB's free tier
+# (0.5 vCPU / 256MB RAM / 1GB disk), per the fairness rule in the brief.
+# CognoDB and AuraDB Free are NOT here -- they're managed clouds, reached
+# via connection strings in .env, never containers.
+#
+# `deploy.resources.limits` requires Compose V2 (the `docker compose`
+# CLI plugin, not the legacy standalone `docker-compose`) -- V2 applies
+# these limits directly to `docker compose up` without needing Swarm
+# mode. Run `docker compose version` first if limits don't seem to
+# take effect; older installs need `cpus:`/`mem_limit:` top-level keys
+# instead.
+
+services:
+  neo4j:
+    image: neo4j:5.24-community
+    container_name: graphparity-neo4j
+    environment:
+      - NEO4J_AUTH=neo4j/devpassword
+      - NEO4J_dbms_memory_pagecache_size=128M
+      - NEO4J_dbms_memory_heap_initial__size=128M
+      - NEO4J_dbms_memory_heap_max__size=128M
+    ports:
+      - "7474:7474" # HTTP browser
+      - "7687:7687" # Bolt
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - neo4j_data:/data
+
+  memgraph:
+    image: memgraph/memgraph:2.20
+    container_name: graphparity-memgraph
+    ports:
+      - "7688:7687" # Bolt -- shifted host port, 7687 is taken by neo4j above
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - memgraph_data:/var/lib/memgraph
+
+  arangodb:
+    image: arangodb:3.12
+    container_name: graphparity-arangodb
+    environment:
+      - ARANGO_ROOT_PASSWORD=devpassword
+    ports:
+      - "8529:8529"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - arangodb_data:/var/lib/arangodb3
+
+volumes:
+  neo4j_data:
+  memgraph_data:
+  arangodb_data:
