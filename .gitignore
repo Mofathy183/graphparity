@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# GraphParity-specific
+.env
+results/*.json
+!results/sample_result.json
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/
