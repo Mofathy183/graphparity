@@ -2,19 +2,20 @@
 Root pytest configuration: fixture registration and marker enforcement.
 
 Mirrors PyLedger's root conftest.py exactly in mechanism -- only the
-layer taxonomy changes, since this project has adapters/workloads/
-aggregate instead of core/infra/cli/api. The hook doesn't know or care
-that it's not accounting domains anymore.
+layer taxonomy changes, since this project has errors/adapters/
+workloads/aggregate instead of core/infra/cli/api. The hook doesn't
+know or care that it's not accounting domains anymore.
 
 Two-axis marker discipline:
 
     Speed axis   {"unit", "integration"} -- hand-written on the test
-                 itself. Whether a test performs real I/O is a fact
-                 about its own body, not its file location.
+                itself. Whether a test performs real I/O is a fact
+                about its own body, not its file location.
 
-    Layer axis   {"adapters", "workloads", "aggregate"} -- derived
-                 from the test file's path and applied automatically.
-                 Hand-writing a layer marker is a collection error.
+    Layer axis   {"errors", "adapters", "workloads", "aggregate"} --
+                derived from the test file's path and applied
+                automatically. Hand-writing a layer marker is a
+                collection error.
 
 Every collected test must resolve to exactly one marker from each
 axis, or collection fails loudly with a batched report -- the same
@@ -26,10 +27,14 @@ import pathlib
 import pytest
 
 _SPEED_MARKERS: frozenset[str] = frozenset({"unit", "integration"})
-_LAYER_MARKERS: frozenset[str] = frozenset({"adapters", "workloads", "aggregate"})
+_LAYER_MARKERS: frozenset[str] = frozenset(
+    {"errors", "config", "adapters", "workloads", "aggregate"}
+)
 
 # Directory name -> layer marker. First match wins.
 _LAYER_DIRS: dict[str, str] = {
+    "errors": "errors",
+    "config": "config",
     "adapters": "adapters",
     "workloads": "workloads",
 }
