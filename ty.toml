@@ -1,0 +1,10 @@
+# Copied from PyLedger's ty.toml, trimmed for a single-package project.
+[environment]
+python-version = "3.14"
+
+[src]
+include = ["src", "tests"]
+
+[terminal]
+error-on-warning = true
+output-format = "full"

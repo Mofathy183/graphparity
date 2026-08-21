@@ -1,0 +1,12 @@
+# Copied from PyLedger's ruff.toml, trimmed for a single-package project.
+line-length = 88
+target-version = "py314"
+
+[lint]
+select = ["E", "F", "I", "B", "UP", "C4"]
+ignore = ["E501"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
