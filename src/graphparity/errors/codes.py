@@ -64,3 +64,21 @@ class ErrorCode(StrEnum):
     result matters because a workload/platform pair with no successful
     samples is a data-collection gap, not a legitimate latency of
     zero."""
+
+    # --- Loader boundary --------------------------------------------
+    MALFORMED_EDGE_LINE = "loader.malformed_edge_line"
+    """A raw edge-list line did not split into exactly two whitespace-
+    separated tokens (source id, target id)."""
+
+    EMPTY_DATASET = "loader.empty_dataset"
+    """An edge list had zero usable edges after parsing -- either the
+    source file was empty, or every line was a comment/blank."""
+
+    RELATIONSHIP_COUNT_OUT_OF_RANGE = "loader.relationship_count_out_of_range"
+    """A requested trim target fell outside the relationship-count band
+    every platform's tier was sized to fit."""
+
+    INSUFFICIENT_RELATIONSHIPS = "loader.insufficient_relationships"
+    """The source edge list has fewer relationships than the requested
+    trim target -- the dataset itself is too small to satisfy the
+    request, not a validation-range problem."""
