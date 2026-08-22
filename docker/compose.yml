@@ -1,7 +1,15 @@
 # Self-hosted comparators, resource-capped to match CognoDB's free tier
-# (0.5 vCPU / 256MB RAM / 1GB disk), per the fairness rule in the brief.
+# (0.5 vCPU / 512MB RAM / 1GB disk -- confirmed from the CognoDB console,
+# see graphparity_plan.html), per the fairness rule in the brief.
 # CognoDB and AuraDB Free are NOT here -- they're managed clouds, reached
 # via connection strings in .env, never containers.
+#
+# NOTE: memory limits were originally set to 256M based on an assumed
+# CognoDB spec. The console confirmed the real free-tier instance has
+# 512MB RAM, so all three self-hosted services below were corrected to
+# 512M. Leaving them at 256M would have handicapped every self-hosted
+# comparator relative to CognoDB -- the exact fairness violation this
+# harness exists to avoid.
 #
 # `deploy.resources.limits` requires Compose V2 (the `docker compose`
 # CLI plugin, not the legacy standalone `docker-compose`) -- V2 applies
@@ -16,9 +24,9 @@ services:
     container_name: graphparity-neo4j
     environment:
       - NEO4J_AUTH=neo4j/devpassword
-      - NEO4J_dbms_memory_pagecache_size=128M
-      - NEO4J_dbms_memory_heap_initial__size=128M
-      - NEO4J_dbms_memory_heap_max__size=128M
+      - NEO4J_dbms_memory_pagecache_size=256M
+      - NEO4J_dbms_memory_heap_initial__size=256M
+      - NEO4J_dbms_memory_heap_max__size=256M
     ports:
       - "7474:7474" # HTTP browser
       - "7687:7687" # Bolt
@@ -26,7 +34,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 256M
+          memory: 512M
     volumes:
       - neo4j_data:/data
 
@@ -39,7 +47,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 256M
+          memory: 512M
     volumes:
       - memgraph_data:/var/lib/memgraph
 
@@ -54,7 +62,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 256M
+          memory: 512M
     volumes:
       - arangodb_data:/var/lib/arangodb3
 
