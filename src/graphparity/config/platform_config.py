@@ -12,7 +12,7 @@ actually matches it. Five *instances* of this one model (one per
 platform, each built from its own env-var block) are what
 `config/settings.py` assembles.
 
-This mirrors PyLedger's own config package: config describes shape and
+config describes shape and
 fails fast on a bad value, it never connects to anything and never
 performs I/O. Whether the URI is actually reachable is GraphAdapter's
 concern (BenchmarkError.CONNECTION_FAILED at connect() time), not
