@@ -1,0 +1,108 @@
+{
+  "load_summary": {
+    "platform": "cognodb",
+    "nodes_loaded": 5001,
+    "relationships_loaded": 5714,
+    "elapsed_seconds": 38.58621600002516,
+    "nodes_per_second": 129.60586754598427,
+    "relationships_per_second": 148.08396863782326
+  },
+  "workload_summaries": [
+    {
+      "platform": "cognodb",
+      "workload": "1_hop_traversal",
+      "sample_count": 100,
+      "percentiles": {
+        "50.0": 142.8332999930717,
+        "95.0": 156.82140497374348
+      },
+      "min_ms": 136.83999999193475,
+      "max_ms": 179.7493000049144,
+      "mean_ms": 144.6232210000744
+    },
+    {
+      "platform": "cognodb",
+      "workload": "2_hop_traversal",
+      "sample_count": 100,
+      "percentiles": {
+        "50.0": 144.30530002573505,
+        "95.0": 184.1051200201036
+      },
+      "min_ms": 137.17260002158582,
+      "max_ms": 237.42550000315532,
+      "mean_ms": 150.30033699818887
+    },
+    {
+      "platform": "cognodb",
+      "workload": "3_hop_traversal",
+      "sample_count": 100,
+      "percentiles": {
+        "50.0": 143.0265000090003,
+        "95.0": 164.70204502693377
+      },
+      "min_ms": 136.00930001121014,
+      "max_ms": 208.74889998231083,
+      "mean_ms": 145.0652290013386
+    },
+    {
+      "platform": "cognodb",
+      "workload": "point_lookup",
+      "sample_count": 100,
+      "percentiles": {
+        "50.0": 144.22930000000633,
+        "95.0": 173.83749499567784
+      },
+      "min_ms": 137.1816999744624,
+      "max_ms": 466.61419997690246,
+      "mean_ms": 150.71241699857637
+    },
+    {
+      "platform": "cognodb",
+      "workload": "indexed_lookup",
+      "sample_count": 100,
+      "percentiles": {
+        "50.0": 147.4253500055056,
+        "95.0": 169.2001000308664
+      },
+      "min_ms": 139.87439998891205,
+      "max_ms": 483.5598000208847,
+      "mean_ms": 153.9207260031253
+    },
+    {
+      "platform": "cognodb",
+      "workload": "aggregation",
+      "sample_count": 100,
+      "percentiles": {
+        "50.0": 148.42174999648705,
+        "95.0": 175.8083550055744
+      },
+      "min_ms": 144.82849999330938,
+      "max_ms": 600.9231999632902,
+      "mean_ms": 158.15370499913115
+    },
+    {
+      "platform": "cognodb",
+      "workload": "mixed_10_concurrency",
+      "sample_count": 249,
+      "percentiles": {
+        "50.0": 145.4412000020966,
+        "95.0": 205.6978200096637
+      },
+      "min_ms": 135.66670002182946,
+      "max_ms": 3179.2365000001155,
+      "mean_ms": 204.25571847485423
+    },
+    {
+      "platform": "cognodb",
+      "workload": "mixed_40_concurrency",
+      "sample_count": 419,
+      "percentiles": {
+        "50.0": 265.1205000001937,
+        "95.0": 2284.029880008893
+      },
+      "min_ms": 135.91840001754463,
+      "max_ms": 8220.185699989088,
+      "mean_ms": 521.1087417653217
+    }
+  ]
+}
