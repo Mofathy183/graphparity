@@ -27,7 +27,7 @@ import pytest
 
 _SPEED_MARKERS: frozenset[str] = frozenset({"unit", "integration"})
 _LAYER_MARKERS: frozenset[str] = frozenset(
-    {"errors", "config", "adapters", "workloads", "aggregate"}
+    {"errors", "config", "adapters", "workloads", "aggregate", "loader"}
 )
 
 # Directory name -> layer marker. First match wins.
@@ -36,6 +36,7 @@ _LAYER_DIRS: dict[str, str] = {
     "config": "config",
     "adapters": "adapters",
     "workloads": "workloads",
+    "loader": "loader",
 }
 
 # Files that live directly under tests/ and cover aggregate.py/runner.py
