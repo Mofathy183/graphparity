@@ -2,10 +2,10 @@
 Error code vocabulary for the GraphParity benchmark harness.
 
 Defines the complete, stable set of machine-readable failure
-identifiers that can cross an adapter or config boundary. ErrorCode
-values are never user-facing strings and never carry presentation
-text -- they are the single vocabulary every BenchmarkError instance
-is built from
+identifiers that can cross an adapter, config, or aggregate boundary.
+ErrorCode values are never user-facing strings and never carry
+presentation text -- they are the single vocabulary every
+BenchmarkError instance is built from.
 
 Adding a new failure mode means adding a new member here first;
 nothing downstream should invent an ad hoc string in its place.
@@ -24,6 +24,8 @@ class ErrorCode(StrEnum):
       platform's own client-library exception into a BenchmarkError.
     - Config-boundary codes (``config.*``) are raised by
       ``PlatformConfig`` validation at startup.
+    - Aggregate-boundary codes (``aggregate.*``) are raised by
+      percentile/summary computation over collected workload samples.
 
     Members are intentionally coarse rather than one-per-driver-
     exception: a workload runner or aggregator only needs to know
@@ -53,3 +55,12 @@ class ErrorCode(StrEnum):
     CONFIG_INVALID = "config.invalid"
     """A ``PlatformConfig`` failed validation (bad URI scheme, missing
     credential, or malformed tier spec)."""
+
+    # --- Aggregate boundary ----------------------------------------------
+    EMPTY_SAMPLE_SET = "aggregate.empty_sample_set"
+    """A percentile or summary computation was attempted over zero
+    samples -- e.g. every iteration of a workload failed, leaving
+    nothing to summarize. Distinguishing this from a silent 0.0/None
+    result matters because a workload/platform pair with no successful
+    samples is a data-collection gap, not a legitimate latency of
+    zero."""
