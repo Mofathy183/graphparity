@@ -1,8 +1,7 @@
 """
 Adapter contract for GraphParity.
 
-GraphAdapter is the structural (Protocol) equivalent of PostingRepo in
-PyLedger: it defines the boundary every platform-specific client must
+GraphAdapter is the structural (Protocol) it defines the boundary every platform-specific client must
 satisfy, without any of them inheriting from a shared base class. The
 workload runner and aggregate.py depend only on this module, never on
 a concrete adapter -- that's what keeps five platforms' numbers

@@ -2,8 +2,7 @@
 BenchmarkError: the single exception type crossing every component
 boundary in GraphParity.
 
-Mirrors pyledger.shared.errors.AppError's shape exactly: a frozen
-dataclass carrying a stable ErrorCode, an optional context mapping for
+a frozen dataclass carrying a stable ErrorCode, an optional context mapping for
 logging/interpolation, and an optional original-exception cause kept
 out of equality comparisons. Every adapter and config validator must
 raise this type -- or let it propagate -- rather than a raw driver or
@@ -27,8 +26,7 @@ class BenchmarkError(Exception):
             `isinstance` checks against a driver-specific type -- there
             is only ever one exception type in this codebase.
         context: Structured key/value pairs describing the failure
-            (e.g. platform name, query shape, journal-equivalent
-            identifiers). Used for logging and, where useful,
+            Used for logging and, where useful,
             downstream message interpolation. Never contains
             presentation text itself.
         cause: The original client-library exception this

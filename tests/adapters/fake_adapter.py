@@ -7,7 +7,7 @@ inspection hooks and controllable failure/latency injection so the
 runner's warm-up/discard logic and the mixed-workload concurrency path
 can be exercised deterministically.
 
-Unlike FakePostingRepo, this fake needs to be *scriptable* rather than
+this fake needs to be *scriptable* rather than
 purely observational -- a test asserting "the Nth call during warm-up
 is discarded" needs to control exactly what the Nth call returns and
 how long it appears to take.

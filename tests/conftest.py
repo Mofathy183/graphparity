@@ -1,8 +1,7 @@
 """
 Root pytest configuration: fixture registration and marker enforcement.
 
-Mirrors PyLedger's root conftest.py exactly in mechanism -- only the
-layer taxonomy changes, since this project has errors/adapters/
+since this project has errors/adapters/
 workloads/aggregate instead of core/infra/cli/api. The hook doesn't
 know or care that it's not accounting domains anymore.
 

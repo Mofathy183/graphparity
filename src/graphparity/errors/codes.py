@@ -5,8 +5,7 @@ Defines the complete, stable set of machine-readable failure
 identifiers that can cross an adapter or config boundary. ErrorCode
 values are never user-facing strings and never carry presentation
 text -- they are the single vocabulary every BenchmarkError instance
-is built from, mirroring the role pyledger.shared.errors.ErrorCode
-plays in PyLedger.
+is built from
 
 Adding a new failure mode means adding a new member here first;
 nothing downstream should invent an ad hoc string in its place.
